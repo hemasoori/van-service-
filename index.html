@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Ride Service</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    background:#ffffff;
+    color:#1e293b;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    background:
+      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+      url('pic6.jpg') center/cover no-repeat;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    padding:5px;
+}
+
+.hero h1{
+    font-size:44px;
+    font-weight:700;
+}
+
+.hero p{
+    margin-top:10px;
+    font-size:18px;
+    background:rgba(255,255,255,0.15);
+    padding:10px 18px;
+    border-radius:10px;
+}
+
+/* BUTTONS */
+.btn{
+    margin-top:20px;
+}
+
+.btn button{
+    padding:12px 22px;
+    margin:6px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn button:hover{
+    transform:scale(1.08);
+}
+
+.call{ background:#22c55e; color:white; }
+.whatsapp{ background:#25D366; color:white; }
+.route{ background:#2563eb; color:white; }
+
+/* SECTIONS */
+section{
+    padding:70px 20px;
+    text-align:center;
+    background:white;
+}
+
+/* TITLE */
+h2{
+    font-size:28px;
+    margin-bottom:20px;
+    position:relative;
+}
+
+h2::after{
+    content:"";
+    width:70px;
+    height:4px;
+    background:linear-gradient(90deg,#3b82f6,#a855f7);
+    display:block;
+    margin:10px auto;
+    border-radius:10px;
+}
+
+/* ABOUT */
+.about-text{
+    font-size:18px;
+    line-height:1.9;
+    max-width:950px;
+    margin:auto;
+    background:#f8fafc;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* ROUTE BOX */
+.route-box{
+    background:#f9fafb;
+    padding:25px;
+    border-radius:15px;
+    width:90%;
+    max-width:850px;
+    margin:auto;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* ROUTE LIST */
+/* ROUTE LIST - TIMELINE STYLE */
+.route-list{
+    margin-top:20px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* vertical line */
+.route-list::before{
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:linear-gradient(#3b82f6,#a855f7);
+    border-radius:10px;
+}
+
+/* STOP (timeline node) */
+.stop{
+    background:#ffffff;
+    padding:10px 16px;
+    margin:10px 0;
+    border-radius:25px;
+    font-weight:600;
+    font-size:14px;
+    width:220px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    position:relative;
+    transition:0.3s;
+}
+
+/* dot */
+.stop::before{
+    content:"";
+    position:absolute;
+    left:-18px;
+    top:50%;
+    transform:translateY(-50%);
+    width:14px;
+    height:14px;
+    background:#3b82f6;
+    border:3px solid white;
+    border-radius:50%;
+    box-shadow:0 0 10px rgba(59,130,246,0.5);
+}
+
+.stop:hover{
+    transform:scale(1.05);
+    background:#eef2ff;
+}
+
+.arrow{
+    font-size:18px;
+    color:#3b82f6;
+}
+
+/* CARDS */
+.cards{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.card{
+    background:#f9fafb;
+    padding:22px;
+    width:280px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:#eef2ff;
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.stat{
+    background:linear-gradient(135deg,#6366f1,#3b82f6);
+    color:white;
+    padding:22px;
+    border-radius:15px;
+    width:220px;
+    font-weight:bold;
+}
+
+/* CONTACT */
+.contact{
+    background:#0f172a;
+    color:white;
+}
+
+/* RATING */
+.rating{
+    font-size:40px;
+    cursor:pointer;
+}
+
+.star{ color:#ccc; }
+.star.active{ color:gold; }
+
+/* MOBILE */
+@media(max-width:768px){
+    .hero h1{font-size:28px;}
+    .hero p{font-size:15px;}
+    .cards,.stats{flex-direction:column;align-items:center;}
+    .btn button{width:100%;max-width:250px;}
+    .stop{width:70%;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Swathi School Van Services</h1>
+    <p>Pickup-Drop | Safe & Trusted Service</p>
+
+    <div class="btn">
+        <button class="call" onclick="callNow()">📞 Call Now</button>
+        <button class="whatsapp" onclick="openWhatsApp()">💬 WhatsApp Now</button>
+        <button class="route" onclick="scrollToRoutes()">📍 View Routes</button>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section>
+    <h2>About Us</h2>
+
+    <p class="about-text">
+        We provide a safe and reliable school van service exclusively for students of  
+        <b>St. Joseph's School, Bangalore</b> and <b>Sacred Heart School, Bangalore</b>.
+
+        <br><br>
+        Our mission is to ensure every child reaches school and returns home safely with comfort and punctuality.
+
+        <br><br>
+        ✔ Experienced drivers<br>
+        ✔ Daily route monitoring<br>
+        ✔ Trusted service for parents
+    </p>
+</section>
+
+<!-- ROUTES -->
+<section id="routes">
+    <h2>Van Routes</h2>
+
+    <div class="route-box">
+        <h3>School Van Route</h3>
+
+        <div class="route-list">
+
+            <div class="stop">Indira Nagar</div>
+            <div class="stop">Artillery Road</div>
+            <div class="stop">Cambridge Road</div>
+            <div class="stop">Lakshmi Puram</div>
+            <div class="stop">Murphy Town</div>
+            <div class="stop">Gupta Layout</div>
+            <div class="stop">M.V. Garden</div>
+            <div class="stop">Rama Krishna Road</div>
+            <div class="stop">Halasuru Road</div>
+            <div class="stop">Jogupalya</div>
+            <div class="stop">🏫 School</div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SAFETY -->
+<section>
+    <h2>Child Safety</h2>
+
+    <div class="cards">
+        <div class="card">✔ Experience driving children</div>
+        <div class="card">✔ Follow speed limits</div>
+        <div class="card">✔ Safe pickup points from traffic</div>
+        <div class="card">✔ Safe journey. Secure care. Peace of mind for parents</div>
+        <div class="card">✔ Your child's safety is our highest priority</div>
+        
+    </div>
+</section>
+
+<!-- RATINGS -->
+<section>
+    <h2>Ratings</h2>
+
+    <div class="rating">
+        <span class="star" onclick="rate(1)">★</span>
+        <span class="star" onclick="rate(2)">★</span>
+        <span class="star" onclick="rate(3)">★</span>
+        <span class="star" onclick="rate(4)">★</span>
+        <span class="star" onclick="rate(5)">★</span>
+    </div>
+
+    <p id="rating-text">Click a star to rate us</p>
+</section>
+
+<!-- STATS -->
+<section>
+    <h2>Our Numbers</h2>
+
+    <div class="stats">
+        <div class="stat">50+ Students</div>
+        <div class="stat">school trip done for St.Joseph's School, bangalore and Sacred Heart School, bangalore</div>
+        <div class="stat">21+ Years Service</div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+    <h2>Contact Us</h2>
+
+    <p>📞 +91 9844291917 / +91 8951591917</p>
+    <p>📧 ssoori530@gmail.com</p>
+    <p>📍 Bangalore, Karnataka</p>
+</section>
+
+<script>
+function rate(stars){
+    let allStars = document.querySelectorAll('.star');
+    allStars.forEach((star,index)=>{
+        star.classList.toggle("active", index < stars);
+    });
+
+    document.getElementById("rating-text").innerText =
+        "Thank you! You rated us " + stars + " out of 5 ⭐";
+}
+
+function callNow(){
+    window.location.href = "tel:+919844291917";
+}
+
+function openWhatsApp(){
+    let phoneNumber = "919844291917";
+    let message = "Hello, I want details about the school van service.";
+    let url = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+    window.open(url, "_blank");
+}
+
+function scrollToRoutes(){
+    document.getElementById("routes").scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
